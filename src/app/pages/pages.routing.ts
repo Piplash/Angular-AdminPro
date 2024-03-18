@@ -9,6 +9,7 @@ import { ProgressComponent } from './progress/progress.component';
 import { PromesasComponent } from './promesas/promesas.component';
 import { RxjsComponent } from './rxjs/rxjs.component';
 import { authGuard } from '../guards/auth.guard';
+import { PerfilComponent } from './perfil/perfil.component';
 
 export const routes: Routes = [
     { 
@@ -19,6 +20,7 @@ export const routes: Routes = [
             { path: '', component: DashboardComponent, data: { title: 'Dashboard'} },
             { path: 'account-settings', component: AccountSettingsComponent, data: { title: 'Account Settings'} },
             { path: 'grafica1', component: Grafica1Component, data: { title: 'Gráficas'} },
+            { path: 'perfil', component: PerfilComponent, data: { title: 'Perfil'} },
             { path: 'progress', component: ProgressComponent, data: { title: 'Progress Bar'} },
             { path: 'promesas', component: PromesasComponent, data: { title: 'Promesas'} },
             { path: 'rxjs', component: RxjsComponent, data: { title: 'RXJS'} },

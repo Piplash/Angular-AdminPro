@@ -1,0 +1,50 @@
+<div class="row">
+    <div class="col-lg-6">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">Mi Perfil de Usuario</h4>
+                <h6 class="card-subtitle">Ajustes</h6>
+                <form class="form p-t-20" [formGroup]="profileForm" (ngSubmit)="actualizarPerfil()">
+                    <div class="form-group">
+                        <label for="exampleInputuname">User Name</label>
+                        <div class="input-group">
+                            <div class="input-group-addon"><i class="ti-user"></i></div>
+                            <input type="text" class="form-control" id="exampleInputuname" placeholder="Nombre Completo" formControlName="nombre">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Email address</label>
+                        <div class="input-group">
+                            <div class="input-group-addon"><i class="ti-email"></i></div>
+                            <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Enter email" formControlName="email">
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-block btn-success waves-effect waves-light m-r-10">Guardar Cambios</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-6">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">Avatar</h4>
+                <h6 class="card-subtitle">Mi Imagen</h6>
+
+                <div class="row" style="justify-content: center;">
+                    @if( vistaPrevia != ''){
+                        <img [src]="vistaPrevia" alt="">
+                    }@else{
+                        <img [src]="usuario.imagenUsuario" alt="">
+                    }
+                    
+                </div>
+                <br>
+                <input type="file" (change)="cambiarImagen($event)">
+                <br>
+                <br>
+                <button type="submit" class="btn btn-block btn-success waves-effect waves-light m-r-10" [disabled]="!imagenSubir" (click)="actualizarFoto()">Cambiar Imagen</button>
+            </div>
+        </div>
+    </div>
+</div>
