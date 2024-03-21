@@ -10,7 +10,7 @@ export class FileUploadService {
 
   constructor() { }
 
-  public async actualizarFoto(archivo: File, tipo: 'usuarios' | 'medicos' | 'hospitales', id: string){
+  public async actualizarFoto(archivo: File, tipo: string, id: string){
     try {
       const url = `${base_url}/uploads/${tipo}/${id}`;
       const formData = new FormData();

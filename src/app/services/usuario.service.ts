@@ -32,9 +32,33 @@ export class UsuarioService {
     return this.http.post(`${base_url}/usuarios`, formData);
   }
 
-  public actualizarUsuario( data: {email: string, nombre: string } ){
-    return this.http.put(`${base_url}/usuarios/${this.uid}`, data, {
+  public actualizarUsuario( data: {email: string, nombre: string }, id = this.usuario.uid ){
+    return this.http.put(`${base_url}/usuarios/${id}`, data, {
       headers: {
+        'x-token': this.token
+      }
+    })
+  }
+
+  public cargarUsuarios(desde: any){
+    return this.http.get(`${base_url}/usuarios?desde=${desde}`,{
+      headers:{
+        'x-token': this.token
+      }
+    })
+  }
+
+  public buscarUsuario(usuario: string){
+    return this.http.get(`${base_url}/todo/coleccion/usuarios/${usuario}`,{
+      headers:{
+        'x-token': this.token
+      }
+    })
+  }
+
+  public eliminarUsuario(id: string){
+    return this.http.put(`${base_url}/usuarios/eliminar/${id}`, null, {
+      headers:{
         'x-token': this.token
       }
     })

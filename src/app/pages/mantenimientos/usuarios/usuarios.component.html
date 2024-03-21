@@ -1,0 +1,106 @@
+<div class="row animated fadeIn fast">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+               <input type="text" class="form-control" placeholder="Buscar Usuario..." (keyup)="buscarUsuario(txtBusquedaUsuario.value)" #txtBusquedaUsuario/>
+            </div>
+        </div>
+    </div>
+</div>
+
+@if(cargando){
+    <div class="row animated fadeIn fast">
+        <div class="col-12">
+            <div class="alert alert-info text-center">
+                <h4 class="alert-heading">Cargando</h4>
+                <i class="fa fa-spin fa-refresh fa-2x"></i>
+                <p class="mb-0">Por favor espere</p>
+            </div>
+        </div>
+    </div>
+}
+
+@if(!cargando){
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title">Usuarios</h4>
+                    <h6 class="card-subtitle">Total de usuarios registrados: {{ totalElementos }}</h6>
+                    <div class="table-responsive">
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th class="text-center">Avatar</th>
+                                    <th class="text-center">Correo</th>
+                                    <th class="text-center">Nombre</th>
+                                    <th class="text-center">Rol</th>
+                                    <th class="text-center">Auth</th>
+                                    <th class="text-nowrap">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody class="text-center">
+                                @for (usuario of usuarios; track usuario.uid){
+                                    <tr>
+                                        <td>
+                                            @if( usuario.rutaImagen){
+                                                <img [src]="usuario.rutaImagen" alt="" (click)="abrirModal(usuario)" style="cursor: pointer">
+                                            } @else {
+                                                <a (click)="abrirModal(usuario)" style="cursor:pointer"><i class="fa fa-solid fa-upload"></i></a>
+                                            }
+                                            
+                                        </td>
+                                        <td>{{ usuario.email }}</td>
+                                        <td>{{ usuario.nombre }}</td>
+                                        <td>
+                                            @if(usuarioConectado.role == 'ADMIN_ROLE'){
+
+                                                @if(usuarioConectado.uid == usuario.uid){
+                                                    {{ usuario.role }}
+                                                } @else {
+                                                    <select class="form-control" [(ngModel)]="usuario.role" (change)="cambiarRol(usuario)">
+                                                        <option value="ADMIN_ROLE">ADMIN</option>
+                                                        <option value="USER_ROLE">USUARIO</option>
+                                                    </select>    
+                                                }
+                                                
+                                            } @else {
+                                                {{ usuario.role }}
+                                            }
+                                                                                   
+                                        </td>
+                                        <td>
+                                            <span class="label label-info">Email</span>
+                                            &nbsp;
+                                            <span  [ngClass]="usuario.google ? 'label label-info' : 'label label-danger'">Google</span>
+                                        </td>
+                                        <td class="text-center">
+                                            @if(usuario.uid == usuarioConectado.uid){
+                                                <a routerLink="/dashboard/perfil" data-toggle="tooltip" data-original-title="Editar"> <i class="fa fa-pencil text-inverse m-r-10"></i> </a>
+                                            }
+                                            
+                                            @if(usuario.uid != usuarioConectado.uid && usuarioConectado.role == 'ADMIN_ROLE'){
+                                                <i class="fa fa-close text-danger" style="cursor: pointer" (click)="eliminarUsuario(usuario.uid, usuario.nombre)"></i>
+                                            } @else if (usuario.uid != usuarioConectado.uid){
+                                                -
+                                            }
+                                        </td>
+                                    </tr>
+                                }
+                            
+                            
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="row" style="justify-content: center;">
+                        <button (click)="cambiarPagina(-5)" class="btn btn-secondary" [disabled]="prevDisabled">Anterior</button>
+                        &nbsp;
+                        <button (click)="cambiarPagina(5)" class="btn btn-secondary" [disabled]="nextDisabled">Siguiente</button>
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
