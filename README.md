@@ -1,27 +1,59 @@
-# Adminpro
+# AdminPro
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.0.3.
+Panel administrativo desarrollado con **Angular 17 y TypeScript**, con autenticación, gestión de usuarios, edición de perfil y visualización de gráficas.
 
-## Development server
+El proyecto reúne trabajo frontend con componentes, formularios, navegación protegida e integración con una API. El backend se mantiene en [admin-pro-backend](https://github.com/Piplash/admin-pro-backend).
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+## Funcionalidades y alcance
 
-## Code scaffolding
+- Inicio de sesión, registro y flujo de acceso con Google integrado con el backend.
+- Validación y renovación de sesión mediante un servicio HTTP y un guard de rutas.
+- Consulta, búsqueda, actualización y eliminación de usuarios mediante la API.
+- Edición de perfil y carga de imágenes.
+- Gráficas con Chart.js y ng2-charts.
+- Ajustes de interfaz y ejemplos de uso de promesas y RxJS.
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+Las secciones de médicos y hospitales contienen componentes iniciales; no representan módulos de gestión completos. La aplicación requiere el backend y su configuración para probar las funciones autenticadas.
 
-## Build
+## Stack
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+Angular 17 · TypeScript 5.2 · RxJS 7.8 · Chart.js 4 · ng2-charts · SweetAlert2
 
-## Running unit tests
+## Ejecutar localmente
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+Necesitas Git, npm y una versión de Node.js compatible con Angular 17. Las versiones del proyecto están declaradas en `package.json`.
 
-## Running end-to-end tests
+```bash
+git clone https://github.com/Piplash/Angular-AdminPro.git
+cd Angular-AdminPro
+npm ci
+npm start
+```
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+Abre `http://localhost:4200`. Configura y ejecuta el backend por separado: `src/app/environments/environment.ts` define la URL de la API, cuyo valor actual es `http://localhost:3000/api`.
 
-## Further help
+El acceso con Google requiere además la configuración correspondiente de identidad en frontend y backend.
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+## Organización
+
+| Directorio | Responsabilidad |
+| --- | --- |
+| `src/app/auth/` | Vistas de inicio de sesión y registro. |
+| `src/app/pages/` | Perfil, usuarios, ajustes y vistas del panel. |
+| `src/app/components/` | Componentes de gráficas, controles y modales. |
+| `src/app/services/` | Acceso a la API, sesión, imágenes y configuración. |
+| `src/app/guards/` | Control de acceso a rutas. |
+| `src/app/interfaces/` y `src/app/models/` | Tipos y modelos de datos. |
+
+## Comandos disponibles
+
+```bash
+npm run build
+npm test
+```
+
+`build` genera la compilación en `dist/`; `test` ejecuta el runner configurado con Karma y Jasmine. La existencia de estos comandos no implica una cobertura completa de las funcionalidades.
+
+---
+
+[Felipe Acosta · GitHub](https://github.com/Piplash)
